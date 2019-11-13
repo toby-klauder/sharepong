@@ -432,6 +432,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02b75e521ce2daa42a11bfe44634154e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shakeDuration: 0
+  shakeMagnitude: 0.2
+  dampeningSpeed: 1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

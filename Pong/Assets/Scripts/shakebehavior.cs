@@ -2,24 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class shakebehavior : MonoBehaviour
+public class Shakebehavior : MonoBehaviour
 {
-    private Transform transform;
-    private float shakeDuration = 0f;
-    private float shakeMagnitude = 0.7f;
-    private float dampeningSpeed = 1.0f;
+   
+    public float shakeDuration = 0f;
+    public float shakeMagnitude = 0.7f;
+    public float dampeningSpeed = 1.0f;
     Vector3 initalPos; 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
+       
         if (shakeDuration > 0)
         {
+            print("DEBUGINSIDE");
             transform.localPosition = initalPos + Random.insideUnitSphere * shakeMagnitude;
             shakeDuration -= Time.deltaTime * dampeningSpeed;
         }
@@ -30,13 +32,7 @@ public class shakebehavior : MonoBehaviour
         
     }
 
-    void Awake()
-    {
-        if (transform == null) {
-            transform = GetComponent(typeof(Transform)) as Transform; 
-        }   
-    }
-    void OnEnable()
+    public void OnEnable()
     {
         initalPos = transform.localPosition; 
     }

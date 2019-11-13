@@ -4,9 +4,9 @@ using UnityEngine;
 
 
 
-public class ball : MonoBehaviour
+public class Ball : MonoBehaviour
 {
-    public shakebehavior sb;
+    public Shakebehavior sb;
     public GameObject trigger;
     public AudioClip hitplayer; // start dev on sound triggers 
     public float speed = 5; 
@@ -17,7 +17,7 @@ public class ball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sb = new shakebehavior(); 
+
         rb = GetComponent<Rigidbody2D>();
         ballactivate = 0;
         Vector3 centerPos = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 10f));
@@ -58,6 +58,9 @@ public class ball : MonoBehaviour
         }
         if (collision.gameObject.name == "PlayerOne" || collision.gameObject.name == "PlayerTwo") {
             speed += 1;
+            sb.shakeDuration = 0.5f;
+            print(sb.shakeDuration); 
+            
         }
        
     }
