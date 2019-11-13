@@ -6,15 +6,18 @@ using UnityEngine;
 
 public class ball : MonoBehaviour
 {
+    public shakebehavior sb;
     public GameObject trigger;
     public AudioClip hitplayer; // start dev on sound triggers 
-    public int speed = 0; 
+    public float speed = 5; 
     public int ballactivate = 0; 
     public int playerone, playertwo = 0; 
-    public Rigidbody2D rb; 
+    public Rigidbody2D rb;
+   
     // Start is called before the first frame update
     void Start()
     {
+        sb = new shakebehavior(); 
         rb = GetComponent<Rigidbody2D>();
         ballactivate = 0;
         Vector3 centerPos = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 10f));
@@ -29,33 +32,33 @@ public class ball : MonoBehaviour
         {
             ballactivate++; 
             rb = GetComponent<Rigidbody2D>();
-            int rand1 = Random.Range(-5, 5);
-            int rand2 = Random.Range(-5, 5);
-            rb.velocity = new Vector3(rand1, rand2, 0);
+            int rand1 = Random.Range(1, 5);
+            int rand2 = Random.Range(1, 5);
+            rb.velocity = new Vector2(rand1, rand2).normalized * speed;
         }
-
-       // if (Input.GetKey(KeyCode.R)) {
-         //   int rand1 = Random.Range(-5, 5);
-           // int rand2 = Random.Range(-5, 5);
-           // rb.velocity = new Vector3(rand1, rand2, 0);
+        // if (Input.GetKey(KeyCode.R)) {
+        //   int rand1 = Random.Range(-5, 5);
+        // int rand2 = Random.Range(-5, 5);
+        // rb.velocity = new Vector3(rand1, rand2, 0);
         //}
 
-       // if (Input.GetKey(KeyCode.O)) {
-         //   speed++;
-           // int rand1 = Random.Range(-5, 5);
-            //int rand2 = Random.Range(-5, 5);
-            //rb.velocity = new Vector3(rand1 + speed, rand2 + speed, 0);
+        // if (Input.GetKey(KeyCode.O)) {
+        //   speed++;
+        // int rand1 = Random.Range(-5, 5);
+        //int rand2 = Random.Range(-5, 5);
+        //rb.velocity = new Vector3(rand1 + speed, rand2 + speed, 0);
 
         //}
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "PlayerOneS" || collision.gameObject.name == "PlayerTwoS" || collision.gameObject.name == "PlayerThreeS" || collision.gameObject.name == "PlayerFourS") { 
-            speed = 0; 
+        if (collision.gameObject.name == "PlayerOneS" || collision.gameObject.name == "PlayerTwoS" || collision.gameObject.name == "PlayerThreeS" || collision.gameObject.name == "PlayerFourS") {
             Start(); 
-        } 
-        
+        }
+        if (collision.gameObject.name == "PlayerOne" || collision.gameObject.name == "PlayerTwo") {
+            speed += 1;
+        }
        
     }
 
