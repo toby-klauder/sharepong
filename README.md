@@ -2,7 +2,9 @@
 shared pong with artists. 
 
 //test ball script 
-void Start () {
+
+
+	void Start () {
 	
 		rigid2D = this.gameObject.GetComponent<Rigidbody2D>();
 
