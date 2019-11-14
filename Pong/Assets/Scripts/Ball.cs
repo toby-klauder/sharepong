@@ -8,16 +8,22 @@ public class Ball : MonoBehaviour
 {
     public Shakebehavior sb;
     public GameObject trigger;
+    public GameObject ball; 
     public AudioClip hitplayer; // start dev on sound triggers 
     public float speed = 5; 
     public int ballactivate = 0; 
     public int playerone, playertwo = 0; 
     public Rigidbody2D rb;
-   
+    public Color[] colorlist = new Color[5];
+    public int colorcount = 0; 
     // Start is called before the first frame update
     void Start()
     {
-
+        colorlist[0] = Color.red;
+        colorlist[1] = Color.green;
+        colorlist[2] = Color.magenta;
+        colorlist[3] = Color.yellow;
+        colorlist[4] = Color.grey; 
         rb = GetComponent<Rigidbody2D>();
         ballactivate = 0;
         Vector3 centerPos = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 10f));
@@ -59,7 +65,13 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.name == "PlayerOne" || collision.gameObject.name == "PlayerTwo") {
             speed += 1;
             sb.shakeDuration = 0.5f;
-            print(sb.shakeDuration); 
+            var ballrenderer = ball.GetComponent<Renderer>();
+            if (colorcount == 5) {
+                colorcount = 0; 
+            }
+            ballrenderer.material.SetColor("_Color", colorlist[colorcount]);
+            colorcount++; 
+            
             
         }
        
