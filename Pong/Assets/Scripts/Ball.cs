@@ -39,8 +39,8 @@ public class Ball : MonoBehaviour
         {
             ballactivate++; 
             rb = GetComponent<Rigidbody2D>();
-            int rand1 = Random.Range(1, 5);
-            int rand2 = Random.Range(1, 5);
+            int rand1 = Random.Range(3, 5);
+            int rand2 = Random.Range(3, 5);
             rb.velocity = new Vector2(rand1, rand2).normalized * speed;
         }
         // if (Input.GetKey(KeyCode.R)) {
