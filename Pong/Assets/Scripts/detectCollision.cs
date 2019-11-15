@@ -24,7 +24,7 @@ public class detectCollision : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Ball")
+        if (collision.gameObject.name == "Ball" || collision.gameObject.name == "Duplicate Ball")
         {
             score++;
             if (score == 11) {

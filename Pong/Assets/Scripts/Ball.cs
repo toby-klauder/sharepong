@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events; 
 
 
 public class Ball : MonoBehaviour
 {
+    public UnityEvent onhit;
+    public UnityEvent ongoal; 
     public Shakebehavior sb;
     public GameObject trigger;
-    public GameObject ball; 
-    public AudioClip hitplayer; // start dev on sound triggers 
-    public float speed = 5; 
+    public GameObject ball;  // start dev on sound triggers 
+    public float speed = 5.0f; 
     public int ballactivate = 0; 
     public int playerone, playertwo = 0; 
     public Rigidbody2D rb;
@@ -23,7 +24,7 @@ public class Ball : MonoBehaviour
         colorlist[1] = Color.green;
         colorlist[2] = Color.magenta;
         colorlist[3] = Color.yellow;
-        colorlist[4] = Color.grey; 
+        colorlist[4] = Color.grey;
         rb = GetComponent<Rigidbody2D>();
         ballactivate = 0;
         Vector3 centerPos = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 10f));
@@ -38,8 +39,8 @@ public class Ball : MonoBehaviour
         {
             ballactivate++; 
             rb = GetComponent<Rigidbody2D>();
-            int rand1 = Random.Range(1, 5);
-            int rand2 = Random.Range(1, 5);
+            int rand1 = Random.Range(3, 5);
+            int rand2 = Random.Range(3, 5);
             rb.velocity = new Vector2(rand1, rand2).normalized * speed;
         }
         // if (Input.GetKey(KeyCode.R)) {
@@ -60,11 +61,13 @@ public class Ball : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "PlayerOneS" || collision.gameObject.name == "PlayerTwoS" || collision.gameObject.name == "PlayerThreeS" || collision.gameObject.name == "PlayerFourS") {
-            Start(); 
+            Start();
+            ongoal.Invoke(); 
         }
         if (collision.gameObject.name == "PlayerOne" || collision.gameObject.name == "PlayerTwo") {
-            speed += 1;
+            speed += 0.1f;
             sb.shakeDuration = 0.5f;
+            onhit.Invoke(); 
             var ballrenderer = ball.GetComponent<Renderer>();
             if (colorcount == 5) {
                 colorcount = 0; 
