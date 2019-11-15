@@ -7,7 +7,6 @@ using UnityEngine.Events;
 public class Ball : MonoBehaviour
 {
     public UnityEvent onhit;
-    public UnityEvent ongoal; 
     public Shakebehavior sb;
     public GameObject trigger;
     public GameObject ball;  // start dev on sound triggers 
@@ -62,7 +61,6 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.name == "PlayerOneS" || collision.gameObject.name == "PlayerTwoS" || collision.gameObject.name == "PlayerThreeS" || collision.gameObject.name == "PlayerFourS") {
             Start();
-            ongoal.Invoke(); 
         }
         if (collision.gameObject.name == "PlayerOne" || collision.gameObject.name == "PlayerTwo") {
             speed += 0.1f;

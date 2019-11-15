@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
+using UnityEngine.Events; 
 public class detectCollision : MonoBehaviour
 {
+    public UnityEvent ongoal; 
     public string kittenkaboodle; 
     public int score = 0; 
     public Text txt;
@@ -26,6 +28,7 @@ public class detectCollision : MonoBehaviour
     {
         if (collision.gameObject.name == "Ball" || collision.gameObject.name == "Duplicate Ball")
         {
+            ongoal.Invoke(); 
             score++;
             if (score == 11) {
                 SceneChange(); 
