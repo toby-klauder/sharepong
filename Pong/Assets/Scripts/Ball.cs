@@ -11,7 +11,7 @@ public class Ball : MonoBehaviour
     public Shakebehavior sb;
     public GameObject trigger;
     public GameObject ball;  // start dev on sound triggers 
-    public float speed = 5; 
+    public float speed = 5.0f; 
     public int ballactivate = 0; 
     public int playerone, playertwo = 0; 
     public Rigidbody2D rb;
@@ -65,7 +65,7 @@ public class Ball : MonoBehaviour
             ongoal.Invoke(); 
         }
         if (collision.gameObject.name == "PlayerOne" || collision.gameObject.name == "PlayerTwo") {
-            speed += 1;
+            speed += 0.1f;
             sb.shakeDuration = 0.5f;
             onhit.Invoke(); 
             var ballrenderer = ball.GetComponent<Renderer>();
